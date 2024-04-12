@@ -6,11 +6,12 @@ import com.spring.course.web.repository.ClubRepository;
 import com.spring.course.web.service.ClubService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Component
+@Service
 public class ClubServiceImpl implements ClubService {
     private ClubRepository clubRepository;
 
