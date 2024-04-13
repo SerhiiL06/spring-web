@@ -14,11 +14,11 @@
 						</span>
                     </div>
                 </div>
-                <div class="col-md-7 col-sm-12 col-xs-12">
-                    <div class="product-deatil">
+                <div th:each="club :${clubs}" class="col-md-7 col-sm-12 col-xs-12">
+                    <div class="product-detail">
                         <h5 class="name">
-                            <a href="#">
-                                Product Name Title Here <span>Category</span>
+                            <a href="#" th:text="${club.title}">
+                                ${club.description} <span>Category</span>
                             </a>
                         </h5>
                         <p class="price-container">
@@ -27,7 +27,7 @@
                         <span class="tag1"></span>
                     </div>
                     <div class="description">
-                        <p>Proin in ullamcorper lorem. Maecenas eu ipsum </p>
+                        <p th:text="${club.description}"></p>
                     </div>
                     <div class="product-info smart-form">
                         <div class="row">
