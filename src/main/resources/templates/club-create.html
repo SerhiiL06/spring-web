@@ -1,0 +1,37 @@
+<html xmlns:th="http://thymeleaf.org"
+      xmlns:layout="htto://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}"  >
+<div layout:fragment="body" class="container">
+    <form class="row g-3" role="form" method="post" th:action="@{/clubs/create}" th:object="${club}">
+        <button><a th:href="@{/clubs}">Click</a></button>
+        <div class="col-md-6">
+            <label for="title" class="form-label">Title</label>
+            <input type="text" class="form-control" id="title" name="title" th:field="*{title}"
+            placeholder="title">
+        </div>
+        <div class="col-md-6">
+            <label for="imageUrl" class="form-label">imageUrl</label>
+            <input type="text" class="form-control" id="imageUrl"
+                   name="imageUrl" th:field="*{imageUrl}" placeholder="imageUrl">
+        </div>
+        <div class="col-md-6">
+            <label for="description" class="form-label">description</label>
+            <input type="text" class="form-control" id="description"
+                   name="description" th:field="*{description}" placeholder="descript">
+            >
+        </div>
+        <div class="col-12">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="gridCheck">
+                <label class="form-check-label" for="gridCheck">
+                    Check me out
+                </label>
+            </div>
+        </div>
+        <div class="col-12">
+            <button type="submit" class="btn btn-primary">Sign in</button>
+        </div>
+    </form>
+</div>
+
+</html>

@@ -2,19 +2,21 @@ package com.spring.course.web.controller;
 
 
 import com.spring.course.web.DTO.ClubDto;
+import com.spring.course.web.models.Club;
 import com.spring.course.web.service.ClubService;
-import com.spring.course.web.service.impl.ClubServiceImpl;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 
 @Controller
 public class ClubController {
-    private ClubService service;
+    private final ClubService service;
 
     @Autowired
     public ClubController(ClubService service) {
@@ -24,8 +26,23 @@ public class ClubController {
     @GetMapping("/clubs")
     public String listClubs(Model model) {
         List<ClubDto> clubs = service.findAllClubs();
+        String name = "Serhii";
         model.addAttribute("clubs", clubs);
+        model.addAttribute("name", name);
         return "club-list";
 
+    }
+
+    @GetMapping("/clubs/create")
+    public String createClub(Model model) {
+        Club club = new Club();
+        model.addAttribute("club", club);
+        return "club-create";
+    }
+
+    @PostMapping("/clubs/create")
+    public String createClub(@ModelAttribute("club") Club club) {
+        this.service.saveClub(club);
+        return "redirect:/clubs";
     }
 }

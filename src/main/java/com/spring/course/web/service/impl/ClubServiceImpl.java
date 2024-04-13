@@ -5,7 +5,6 @@ import com.spring.course.web.models.Club;
 import com.spring.course.web.repository.ClubRepository;
 import com.spring.course.web.service.ClubService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -25,6 +24,11 @@ public class ClubServiceImpl implements ClubService {
         List<Club> listOfClubs = this.clubRepository.findAll();
         return listOfClubs.stream().map((club) -> mapToClubDto(club)).collect(Collectors.toList());
     };
+
+    @Override
+    public Club saveClub(Club club) {
+        return this.clubRepository.save(club);
+    }
 
 
     private ClubDto mapToClubDto(Club club) {
