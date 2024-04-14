@@ -17,7 +17,7 @@
                 <div th:each="club :${clubs}" class="col-md-7 col-sm-12 col-xs-12">
                     <div class="product-detail">
                         <h5 class="name">
-                            <a href="#" th:text="${club.title}">
+                            <a th:href="@{/clubs/{clubId}(clubId=${club.id})}" th:text="${club.title}">
                                 ${club.description} <span>Category</span>
                             </a>
                         </h5>

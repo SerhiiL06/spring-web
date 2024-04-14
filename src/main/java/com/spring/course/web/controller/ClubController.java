@@ -5,9 +5,12 @@ import com.spring.course.web.DTO.ClubDto;
 import com.spring.course.web.models.Club;
 import com.spring.course.web.service.ClubService;
 
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -34,6 +37,13 @@ public class ClubController {
 
     }
 
+    @GetMapping("/clubs/{clubId}")
+    public String retrieveClub(@PathVariable("clubId") long clubId, Model model) {
+        ClubDto club = this.service.getClubById(clubId);
+        model.addAttribute("club", club);
+        return "club-detail";
+    }
+
     @GetMapping("/clubs/create")
     public String createClub(Model model) {
         Club club = new Club();
@@ -42,7 +52,15 @@ public class ClubController {
     }
 
     @PostMapping("/clubs/create")
-    public String createClub(@ModelAttribute("club") Club club) {
+    public String createClub(@Valid @ModelAttribute("club") ClubDto club,
+                             BindingResult result,
+                             Model model) {
+
+        if (result.hasErrors()) {
+            model.addAttribute("club", club);
+            return "club-create";
+        }
+
         this.service.saveClub(club);
         return "redirect:/clubs";
     }
@@ -55,10 +73,16 @@ public class ClubController {
         return "club-edit";
     }
 
-//    @PostMapping("/clubs/{clubId}/edit")
-//    public String editClub(@PathVariable("clubId") long clubId, @ModelAttribute("club") ClubDto club) {
-//        club.setId(clubId);
-//        this.service.updateClud(club);
-//        return "redirect:/clubs/";
-//    }
+    @PostMapping("/clubs/{clubId}/edit")
+    public String editClub(@PathVariable("clubId") long clubId,
+                           @Valid @ModelAttribute("club") ClubDto club,
+                           BindingResult bindingResult) {
+
+        if (bindingResult.hasErrors()) {
+            return "redirect:/clubs/" + clubId + "/edit";
+        }
+        club.setId(clubId);
+        this.service.updateClub(club);
+        return "redirect:/clubs";
+    }
 }

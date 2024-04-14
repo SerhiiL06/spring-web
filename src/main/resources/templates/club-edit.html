@@ -3,12 +3,12 @@
       layout:decorate="~{layout}"  >
 <div layout:fragment="body" class="container">
     <form class="row g-3" role="form" method="post" th:action="@{/clubs/{clubId}/edit(clubId=${club.id})}" th:object="${club}">
-        <button><a th:href="@{/clubs}">Click</a></button>
         <input type="hidden" th:fields="*{id}">
         <div class="col-md-6">
             <label for="title" class="form-label">Title</label>
             <input type="text" class="form-control" id="title" name="title" th:field="*{title}"
                    placeholder="title">
+            <p th:if="${#fields.hasErrors('title')}" class="text-danger" th:errors="*{title}"></p>
         </div>
         <div class="col-md-6">
             <label for="imageUrl" class="form-label">imageUrl</label>
