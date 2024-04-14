@@ -40,6 +40,12 @@ public class ClubServiceImpl implements ClubService {
     }
 
 
+    @Override
+    public List<ClubDto> searchClubs(String search) {
+        List<Club> clubs = this.clubRepository.searchClubs(search);
+        return clubs.stream().map((club) -> mapToClubDto(club)).collect(Collectors.toList());
+    }
+
     private Club mapToClub(ClubDto clubDto) {
         Club clubBuid = Club.builder()
                 .title(clubDto.getTitle())
