@@ -7,14 +7,10 @@ import com.spring.course.web.service.ClubService;
 
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -85,4 +81,14 @@ public class ClubController {
         this.service.updateClub(club);
         return "redirect:/clubs";
     }
+
+    @GetMapping("/clubs/{clubId}/delete")
+    public String deleteClub(@PathVariable("clubId") long clubId, Model model) {
+        String result = this.service.deleteClub(clubId);
+        model.addAttribute("result", result);
+        return "redirect:/clubs";
+    }
 }
+
+
+

@@ -5,6 +5,7 @@
     <h1 th:text="${club.title}"></h1>
     <h2 th:text="${club.description}"></h2>
     <h4 th:text="${club.createOn}"></h4>
+    <button class="bth-danger"><a th:href="@{/clubs/{clubId}/delete(clubId=${club.id})}">Delete club</a></button>
 </div>
 
 </html>

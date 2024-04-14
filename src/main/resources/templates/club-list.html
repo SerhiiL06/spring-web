@@ -2,9 +2,12 @@
       xmlns:layout="htto://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout}"  >
 <div layout:fragment="body" class="container">
+    <p th:text="${result}"></p>
     <div class="col-xs-12 col-md-6 bootstrap snippets bootdeys">
+
+        <p th:if="${result}" th:text="${result}"></p>
         <!-- product -->
-        <div class="product-content product-wrap clearfix">
+        <div  th:each="club :${clubs}" class="product-content product-wrap clearfix">
             <div class="row">
                 <div class="col-md-5 col-sm-12 col-xs-12">
                     <div class="product-image">
@@ -14,7 +17,7 @@
 						</span>
                     </div>
                 </div>
-                <div th:each="club :${clubs}" class="col-md-7 col-sm-12 col-xs-12">
+                <div class="col-md-7 col-sm-12 col-xs-12">
                     <div class="product-detail">
                         <h5 class="name">
                             <a th:href="@{/clubs/{clubId}(clubId=${club.id})}" th:text="${club.title}">

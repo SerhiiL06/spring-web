@@ -10,6 +10,7 @@ public interface ClubService {
     Club saveClub(ClubDto club);
     void updateClub(ClubDto club);
     ClubDto getClubById(Long id);
+    String deleteClub(Long id);
 
 
 }

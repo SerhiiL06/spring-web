@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -47,6 +48,17 @@ public class ClubServiceImpl implements ClubService {
         return clubBuid;
     }
 
+    @Override
+    public String deleteClub(Long id) {
+        Optional<Club> club = this.clubRepository.findById(id);
+
+        if (club.isEmpty()) {
+            return "Club not found";
+        }
+
+        this.clubRepository.deleteById(id);
+        return "Club deleted";
+    }
 
 
     @Override
