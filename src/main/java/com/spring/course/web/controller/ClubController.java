@@ -6,6 +6,7 @@ import com.spring.course.web.models.Club;
 import com.spring.course.web.service.ClubService;
 
 import jakarta.validation.Valid;
+import jakarta.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,6 +32,13 @@ public class ClubController {
         model.addAttribute("name", name);
         return "club-list";
 
+    }
+
+    @PostMapping("/clubs/search")
+    public String searchClub(@RequestParam("search") String search, Model model) {
+        List<ClubDto> clubs = service.searchClubs(search);
+        model.addAttribute("clubs", clubs);
+        return "club-list";
     }
 
     @GetMapping("/clubs/{clubId}")

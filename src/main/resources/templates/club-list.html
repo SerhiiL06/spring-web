@@ -6,6 +6,12 @@
     <div class="col-xs-12 col-md-6 bootstrap snippets bootdeys">
 
         <p th:if="${result}" th:text="${result}"></p>
+        <div>
+            <form th:action="@{/clubs/search}" method="post">
+                <input name="search" >
+                <button type="submit">Search</button>
+            </form>
+        </div>
         <!-- product -->
         <div  th:each="club :${clubs}" class="product-content product-wrap clearfix">
             <div class="row">
