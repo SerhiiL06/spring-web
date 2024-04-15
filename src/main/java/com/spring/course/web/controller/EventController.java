@@ -9,10 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -28,10 +25,24 @@ public class EventController {
 
 
     @GetMapping("/clubs/events")
-    public String clubEvents(@Nullable @RequestParam("clubId") Long clubId, Model model) {
+    public String clubEvents(@Nullable @RequestParam("club_id") Long clubId, Model model) {
         List<EventDto> events = this.eventService.findAllEvents(clubId);
         model.addAttribute("events", events);
         return "club-events";
+    }
+
+    @GetMapping("/clubs/events/{eventId}")
+    public String retrieveEvent(@PathVariable("eventId") Long eventId, Model model) {
+        EventDto event = this.eventService.findEventById(eventId);
+        model.addAttribute("event", event);
+        return "event-detail";
+
+    }
+
+    @GetMapping("/clubs/events/{eventId}/delete")
+    public String deleteEvent(@PathVariable("eventId") Long eventId, Model model) {
+        this.eventService.deleteEventById(eventId);
+        return  "redirect:/clubs/events";
     }
 
     @GetMapping("/clubs/events/create")

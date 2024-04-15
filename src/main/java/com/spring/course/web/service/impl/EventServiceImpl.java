@@ -10,7 +10,6 @@ import jakarta.validation.constraints.Null;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -48,6 +47,19 @@ public class EventServiceImpl implements EventService {
         }
 
     }
+
+    @Override
+    public EventDto findEventById(Long eventId) {
+        Optional<Event> event = this.eventRepository.findById(eventId);
+
+        return event.map(this::mapEventToDto).orElse(null);
+    }
+    @Override
+    public String deleteEventById(Long eventId) {
+        this.eventRepository.deleteById(eventId);
+        return "Event deleted";
+    };
+
 
     private Event mapDtoToEvent(EventDto event) {
         Event eventModel = Event.builder()
