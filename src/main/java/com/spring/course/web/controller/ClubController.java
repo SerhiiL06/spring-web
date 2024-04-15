@@ -85,8 +85,7 @@ public class ClubController {
         if (bindingResult.hasErrors()) {
             return "redirect:/clubs/" + clubId + "/edit";
         }
-        club.setId(clubId);
-        this.service.updateClub(club);
+        this.service.updateClub(clubId, club);
         return "redirect:/clubs";
     }
 

@@ -34,8 +34,9 @@ public class ClubServiceImpl implements ClubService {
 
 
     @Override
-    public void updateClub(ClubDto clubDto) {
+    public void updateClub(Long clubId, ClubDto clubDto) {
         Club club = this.mapToClub(clubDto);
+        club.setId(clubId);
         this.clubRepository.save(club);
     }
 

@@ -1,0 +1,33 @@
+<html xmlns:th="http://thymeleaf.org"
+      xmlns:layout="htto://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}"  >
+<div layout:fragment="body" class="container">
+    <form class="row g-3" role="form" method="post" th:action="@{/clubs/events/create}" th:object="${event}">
+        <div class="col-md-6">
+            <label for="name" class="form-label">Name</label>
+            <input type="text" class="form-control" id="name" name="name" th:field="*{name}"
+                   placeholder="name">
+        </div>
+        <div class="col-md-6">
+            <label for="startTime" class="form-label">startTime</label>
+            <input type="datetime-local" class="form-control" id="startTime"
+                   name="startTime" th:field="*{startTime}" placeholder="startTime">
+        </div>
+        <div class="col-md-6">
+            <label for="endTime" class="form-label">endTime</label>
+            <input type="datetime-local" class="form-control" id="endTime"
+                   name="endTime" th:field="*{endTime}" placeholder="endTime">
+        </div>
+        <div class="col-md-6">
+            <label for="clubId" class="form-label">clubId</label>
+            <input type="text" class="form-control" id="clubId"
+                   name="clubId" th:field="*{clubId}" placeholder="clubId">
+            >
+        </div>
+        <div class="col-12">
+            <button type="submit" class="btn btn-primary">Sign in</button>
+        </div>
+    </form>
+</div>
+
+</html>
