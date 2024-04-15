@@ -3,6 +3,7 @@ package com.spring.course.web.controller;
 import com.spring.course.web.DTO.EventDto;
 import com.spring.course.web.models.Event;
 import com.spring.course.web.service.EventService;
+import jakarta.annotation.Nullable;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,15 +12,26 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.List;
 
 @Controller
 public class EventController {
 
-    private EventService eventService;
+    private final EventService eventService;
 
     @Autowired
     public EventController(EventService eventService) {
         this.eventService = eventService;
+    }
+
+
+    @GetMapping("/clubs/events")
+    public String clubEvents(@Nullable @RequestParam("clubId") Long clubId, Model model) {
+        List<EventDto> events = this.eventService.findAllEvents(clubId);
+        model.addAttribute("events", events);
+        return "club-events";
     }
 
     @GetMapping("/clubs/events/create")

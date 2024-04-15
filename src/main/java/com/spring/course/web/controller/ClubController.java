@@ -6,7 +6,6 @@ import com.spring.course.web.models.Club;
 import com.spring.course.web.service.ClubService;
 
 import jakarta.validation.Valid;
-import jakarta.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

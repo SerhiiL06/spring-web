@@ -28,6 +28,7 @@ public class EventDto {
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     private LocalDateTime endTime;
     private Long clubId;
+    private Club club;
 
 
 }
