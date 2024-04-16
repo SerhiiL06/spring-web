@@ -40,7 +40,7 @@ public class EventController {
     }
 
     @GetMapping("/clubs/events/{eventId}/delete")
-    public String deleteEvent(@PathVariable("eventId") Long eventId, Model model) {
+    public String deleteEvent(@PathVariable("eventId") Long eventId) {
         this.eventService.deleteEventById(eventId);
         return  "redirect:/clubs/events";
     }
